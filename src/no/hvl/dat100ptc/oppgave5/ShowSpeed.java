@@ -49,8 +49,21 @@ public class ShowSpeed extends EasyGraphics {
 		int x = MARGIN,y;
 
 		// TODO - START
+		double sum=0;
+		for(double e : speeds) {
+			sum=sum+e;	
+		}
+		int av = (int)sum/speeds.length;
+		for(int i=0;i<N;i++) {
+			
+			y = (int)speeds[i];
+			setColor(100, 100, 200);
+			drawLine(i*2,ybase,i*2,y);	
+			setColor(250,0,0);
+			drawLine(i*2,av,i*2,av);
+			
+		}
 		
-		throw new UnsupportedOperationException(TODO.method());
 	
 		// TODO - SLUTT
 	}

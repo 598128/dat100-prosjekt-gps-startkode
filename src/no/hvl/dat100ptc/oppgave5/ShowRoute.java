@@ -36,7 +36,7 @@ public class ShowRoute extends EasyGraphics {
 
 		showRouteMap(MARGIN + MAPYSIZE);
 		
-		showStatistics();
+		//showStatistics();
 	}
 
 	// antall x-pixels per lengdegrad
@@ -57,7 +57,13 @@ public class ShowRoute extends EasyGraphics {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+
+		ystep = MAPYSIZE / (Math.abs(maxlat - minlat)); 
+
+		return ystep;
+		
 
 		// TODO - SLUTT
 		
@@ -66,8 +72,26 @@ public class ShowRoute extends EasyGraphics {
 	public void showRouteMap(int ybase) {
 
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		int xnew;
+		int ynew;
+		int xold;
+		int yold;
+		for(int i=0;i<gpspoints.length;i++) {
+			xnew = (int)((gpspoints[i].getLatitude()-60)*2000);
+			ynew = (int)((gpspoints[i].getLongitude()-5)*2000);
+			if(i>0) {
+				xold = (int)((gpspoints[i-1].getLatitude()-60)*2000);
+				yold = (int)((gpspoints[i-1].getLongitude()-5)*2000);
+			}
+			else {
+			xold = (int)((gpspoints[i].getLatitude()-60)*2000);
+			yold = (int)((gpspoints[i].getLongitude()-5)*2000);	
+			}
+			
+			drawLine(xold,yold,xnew,ynew);
+			fillCircle(xnew,ynew,1);
+			setColor(100, 100, 200);
+		}
 		
 		// TODO - SLUTT
 	}
@@ -81,9 +105,10 @@ public class ShowRoute extends EasyGraphics {
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//int x = GPSComputer.totalTime();
 		
 		// TODO - SLUTT;
 	}
 
 }
+
